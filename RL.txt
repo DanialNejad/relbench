@@ -1,0 +1,4 @@
+Mean Absolute Position Error (from 10th timestep): 0.015992139704854216
+Mean RMSE of Position Error (from 10th timestep): 0.018322000970266386
+Mean Variance of Position Error (from 10th timestep): 8.554780049374212e-05
+Mean Standard Deviation of Position Error (from 10th timestep): 0.008080463159591485

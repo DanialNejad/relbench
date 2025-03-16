@@ -120,3 +120,5 @@ class Database:
                     right_index=True,
                 )
                 table.df[fkey_col] = out["index"]
+        mapping = index_map_dict
+        return mapping

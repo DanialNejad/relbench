@@ -181,3 +181,31 @@ def link_prediction_map(
     precision_mat = np.cumsum(pred_isin, axis=1) / (np.arange(eval_k) + 1)
     maps = (precision_mat * pred_isin).sum(axis=1) / clipped_dst_count
     return maps.mean()
+
+def link_prediction_top(
+    pred_isin: NDArray[np.int_],
+    dst_count: NDArray[np.int_],
+) -> float:
+    """
+    This function checks if a customer bought at least one of the recommended items from the top-k recommendations.
+
+    Arguments:
+    - pred_isin: A numpy boolean array of shape (num_customers, k) where each entry indicates if the recommended item was bought.
+    - dst_count: A numpy array of shape (num_customers,) indicating the total number of items bought by each customer.
+
+    Returns:
+    - The mean of customers who bought at least one item from the top-k recommendations.
+    """
+
+    # Step 1: Filter out customers with no purchases (dst_count == 0)
+    pred_isin, dst_count = _filter(pred_isin, dst_count)
+
+    # Step 2: For each customer, check if they bought any of the recommended items.
+    # This is done by checking if any value in the row is True (i.e., customer bought one of the recommended items).
+    bought_from_recommendations = pred_isin.any(axis=1)
+
+    # Step 3: Calculate the mean over all customers.
+    # This will return the proportion of customers who bought at least one recommended item.
+    top_k_accuracy = bought_from_recommendations.mean()
+
+    return top_k_accuracy

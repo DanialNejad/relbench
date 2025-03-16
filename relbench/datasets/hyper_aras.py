@@ -10,7 +10,7 @@ class TransactionalDataset(Dataset):
 
     def make_db(self) -> Database:
         # Path to your CSVs folder
-        path = os.path.join("data", "transactional_data")
+        path = os.path.join("C:/Users/KN2C/Desktop/Dani/relbench/relbench/", "hyper_data")
         customers = os.path.join(path, "Customers.csv")
         articles = os.path.join(path, "Articles.csv")
         branches = os.path.join(path, "Branches.csv")
